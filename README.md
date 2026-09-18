@@ -44,21 +44,26 @@
 
 ---
 
-## ধাপ ৩: Vercel-এ ফ্রি হোস্টিং
+## ধাপ ৩: Netlify-তে ফ্রি হোস্টিং
 
-1. [vercel.com](https://vercel.com) এ যান, **Sign Up** করুন — GitHub অ্যাকাউন্ট দিয়ে সাইন ইন করাই সহজ
-2. **Add New → Project** ক্লিক করুন
-3. আপনার `ngo-work-plan-system` রিপোজিটরি খুঁজে **Import** করুন
-4. **Environment Variables** সেকশনে ধাপ ১ থেকে সংগ্রহ করা তিনটি মান যোগ করুন:
+1. [netlify.com](https://netlify.com) এ যান, **Sign up** করুন — GitHub অ্যাকাউন্ট দিয়ে সাইন ইন করাই সহজ
+2. ড্যাশবোর্ডে **Add new site → Import an existing project** ক্লিক করুন
+3. **GitHub** সিলেক্ট করে অনুমতি দিন, তারপর আপনার `ngo-work-plan-system` রিপোজিটরি খুঁজে নিন
+4. Build সেটিংস স্বয়ংক্রিয়ভাবে চিনে নেবে (Build command: `npm run build`) — কিছু বদলানোর দরকার নেই, কারণ প্রজেক্টে থাকা `netlify.toml` ফাইলটি এটা ঠিক করে দেবে
+5. **Add environment variables** এ ক্লিক করে ধাপ ১ থেকে সংগ্রহ করা তিনটি মান যোগ করুন:
 
-   | Name | Value |
+   | Key | Value |
    |---|---|
    | `NEXT_PUBLIC_SUPABASE_URL` | আপনার Project URL |
-   | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | আপনার anon public কী |
-   | `SUPABASE_SERVICE_ROLE_KEY` | আপনার service_role কী |
+   | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | আপনার anon/publishable কী |
+   | `SUPABASE_SERVICE_ROLE_KEY` | আপনার service_role/secret কী |
 
-5. **Deploy** বাটনে ক্লিক করুন — ২-৩ মিনিট অপেক্ষা করুন
-6. ডিপ্লয় শেষ হলে আপনি একটি লিংক পাবেন, যেমন: `https://ngo-work-plan-system.vercel.app` — এটাই আপনার সফটওয়্যারের ঠিকানা, সম্পূর্ণ ফ্রি!
+6. **Deploy [site name]** বাটনে ক্লিক করুন — ২-৩ মিনিট অপেক্ষা করুন
+7. ডিপ্লয় শেষ হলে আপনি একটি লিংক পাবেন, যেমন: `https://random-name-1234.netlify.app` — এটাই আপনার সফটওয়্যারের ঠিকানা, সম্পূর্ণ ফ্রি!
+8. চাইলে **Site configuration → Change site name** থেকে লিংকের নামটা বদলে সহজ কিছু (যেমন `mdo-work-plan.netlify.app`) করে নিতে পারেন
+
+### পরবর্তীতে কোড বদলালে
+GitHub রিপোজিটরিতে নতুন ফাইল আপলোড/আপডেট করলেই Netlify স্বয়ংক্রিয়ভাবে নতুন ভার্সন বিল্ড করে লাইভ করে দেবে — আলাদা করে কিছু করা লাগবে না।
 
 ---
 
@@ -97,10 +102,10 @@ values ('এখানে-UID-পেস্ট-করুন', 'admin', 'সিস�
 চালু করতে চাইলে:
 1. যেকোনো একটি বাংলাদেশি SMS গেটওয়েতে অ্যাকাউন্ট খুলুন এবং প্রিপেইড ব্যালেন্স রিচার্জ করুন — যেমন [bulksmsbd.net](https://bulksmsbd.net), SSL Wireless, বা REVE Systems
 2. তাদের কাছ থেকে **API Key** ও **Sender ID** সংগ্রহ করুন
-3. Vercel প্রজেক্টের **Settings → Environment Variables**-এ গিয়ে যোগ করুন:
+3. Netlify সাইটের **Site configuration → Environment variables**-এ গিয়ে যোগ করুন:
    - `SMS_API_KEY`
    - `SMS_SENDER_ID`
-4. **Redeploy** ক্লিক করুন
+4. **Deploys** ট্যাবে গিয়ে **Trigger deploy → Deploy site** ক্লিক করুন (এতে নতুন এনভায়রনমেন্ট ভ্যারিয়েবলসহ সাইট আবার বিল্ড হবে)
 
 *(অন্য কোনো গেটওয়ে ব্যবহার করতে চাইলে জানাবেন — `lib/sms.ts` ফাইলটি সেই গেটওয়ের জন্য বদলে দেব।)*
 
@@ -116,4 +121,4 @@ values ('এখানে-UID-পেস্ট-করুন', 'admin', 'সিস�
 
 ## ভবিষ্যতে বদলাতে চাইলে
 
-কোনো পরিবর্তন দরকার হলে (নতুন ফিচার, ডিজাইন পরিবর্তন ইত্যাদি) আমাকে (Claude) আবার বলতে পারেন — আমি কোড আপডেট করে দেব, আপনি শুধু GitHub-এ ফাইল বদলে আপলোড করলেই Vercel স্বয়ংক্রিয়ভাবে নতুন ভার্সন লাইভ করে দেবে।
+কোনো পরিবর্তন দরকার হলে (নতুন ফিচার, ডিজাইন পরিবর্তন ইত্যাদি) আমাকে (Claude) আবার বলতে পারেন — আমি কোড আপডেট করে দেব, আপনি শুধু GitHub-এ ফাইল বদলে আপলোড করলেই Netlify স্বয়ংক্রিয়ভাবে নতুন ভার্সন লাইভ করে দেবে।
